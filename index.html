@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VocabFlash - TypeScript Flashcards</title>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <div id="app" class="container">
+    <header class="header">
+      <h1>VocabFlash 🧠</h1>
+      <p>Aplikasi Hafalan Kosakata Interaktif (TypeScript Project)</p>
+    </header>
+
+    <!-- Ringkasan Otomatis -->
+    <section class="summary-section">
+      <div class="card stat-card">
+        <h3>Total Kosakata</h3>
+        <p id="stat-total">0</p>
+      </div>
+      <div class="card stat-card">
+        <h3>Sudah Dikuasai</h3>
+        <p id="stat-mastered">0</p>
+      </div>
+      <div class="card stat-card">
+        <h3>Persentase Penguasaan</h3>
+        <p id="stat-percentage">0%</p>
+      </div>
+    </section>
+
+    <!-- Kontrol & Aksi -->
+    <section class="controls-section">
+      <div class="search-filter-group">
+        <input type="text" id="search-input" placeholder="Cari kata atau arti...">
+        <select id="filter-status">
+          <option value="">Semua Status</option>
+          <option value="Belajar">Belajar</option>
+          <option value="Dalam Proses">Dalam Proses</option>
+          <option value="Dikuasai">Dikuasai</option>
+        </select>
+        <select id="filter-category">
+          <option value="">Semua Kategori</option>
+          <option value="Noun">Noun (Kata Benda)</option>
+          <option value="Verb">Verb (Kata Kerja)</option>
+          <option value="Adjective">Adjective (Kata Sifat)</option>
+          <option value="Adverb">Adverb (Kata Keterangan)</option>
+          <option value="Other">Other (Lainnya)</option>
+        </select>
+      </div>
+      <div class="action-buttons">
+        <button id="btn-open-modal" class="btn btn-primary">+ Tambah Kosakata</button>
+        <button id="btn-start-quiz" class="btn btn-secondary">🎮 Mode Kuis / Acak</button>
+      </div>
+    </section>
+
+    <!-- Area Loading / Error -->
+    <div id="loading-state" class="notification hidden">Memuat data kosakata...</div>
+    <div id="error-state" class="notification error hidden"></div>
+
+    <!-- Daftar Kosakata (Grid Flashcard) -->
+    <main id="flashcard-grid" class="flashcard-grid">
+      <!-- Diisi secara dinamis lewat TypeScript -->
+    </main>
+
+    <!-- MODAL FORM TAMBAH/EDIT KOSAKATA (PENTING AGAR TOMBOL BERFUNGSI) -->
+    <div id="vocab-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2 id="modal-title">Tambah Kosakata Baru</h2>
+        <form id="vocab-form">
+          <input type="hidden" id="card-id">
+          <div class="form-group">
+            <label for="input-word">Kata (English):</label>
+            <input type="text" id="input-word" required placeholder="Contoh: Brave">
+          </div>
+          <div class="form-group">
+            <label for="input-meaning">Arti / Terjemahan:</label>
+            <input type="text" id="input-meaning" required placeholder="Contoh: Berani">
+          </div>
+          <div class="form-group">
+            <label for="input-example">Contoh Kalimat:</label>
+            <textarea id="input-example" required placeholder="Contoh: He is a brave firefighter."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="input-category">Kategori:</label>
+            <select id="input-category">
+              <option value="Noun">Noun</option>
+              <option value="Verb">Verb</option>
+              <option value="Adjective">Adjective</option>
+              <option value="Adverb">Adverb</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="input-status">Status Hafalan:</label>
+            <select id="input-status">
+              <option value="Belajar">Belajar</option>
+              <option value="Dalam Proses">Dalam Proses</option>
+              <option value="Dikuasai">Dikuasai</option>
+            </select>
+          </div>
+          <div class="modal-actions">
+            <button type="button" id="btn-cancel" class="btn btn-outline">Batal</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL KUIS -->
+    <div id="quiz-modal" class="modal hidden">
+      <div class="modal-content quiz-content">
+        <h2>Mode Kuis Flashcard Acak</h2>
+        <div id="quiz-container" class="quiz-box"></div>
+        <div class="modal-actions">
+          <button type="button" id="btn-close-quiz" class="btn btn-outline">Tutup Kuis</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
